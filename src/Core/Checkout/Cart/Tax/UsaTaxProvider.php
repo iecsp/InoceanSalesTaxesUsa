@@ -122,6 +122,11 @@ class UsaTaxProvider extends AbstractTaxProvider
         );
     }
 
+    private function getTaxRatesByZipCode(string $zipCode): array
+    {
+        return [];
+    }
+
     private function getTaxRatesByProvince(string $province): array
     {
         $provinceCode = substr(strtoupper($province), -2);
