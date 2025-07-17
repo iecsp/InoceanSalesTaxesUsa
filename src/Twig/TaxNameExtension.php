@@ -15,6 +15,39 @@ class TaxNameExtension extends AbstractExtension
         ];
     }
 
+    // "us_tax_rates": {
+    //     "last_updated": "2025-07-16",
+    //     "states": {
+    //         "ME": {
+    //             "state_name": "ME",
+    //             "state_rate": "0.055",
+    //             "zip_codes": {
+    //                 "3579":   {
+    //                     "tax_region_name": "MAINE",
+    //                     "estimated_combined_rate": "0.055",
+    //                     "state_rate": "0.055",
+    //                     "estimated_county_rate": "0.0",
+    //                     "estimated_city_rate": "0.0",
+    //                     "estimated_special_rate": "0.0",
+    //                     "risk_level": "Low"
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    /** 
+        * Example of US Inovice: 
+        * SUBTOTAL                                         $238.94
+        * --------------------------------------------------------
+        * TAX BREAKDOWN:
+        * California State Tax (7.25%)                    $17.32
+        * Los Angeles County Tax (0.25%)                   $0.60
+        * Los Angeles City Tax (0.50%)                     $1.19
+        * Special Tax (0.50%)                              $1.19
+        * Total Tax Rate: 8.50%                           $20.30
+        * --------------------------------------------------------
+        * TOTAL AMOUNT DUE                                 $259.24
+    */
     public function getTaxName(float $value, string $language = 'fr'): string
     {
         

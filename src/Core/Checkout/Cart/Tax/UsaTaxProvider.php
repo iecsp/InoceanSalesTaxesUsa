@@ -7,7 +7,7 @@
  * holder, unless otherwise permitted by law.
  */
 
-namespace InoceanSalesTaxesCanada\Core\Checkout\Cart\Tax;
+namespace InoceanSalesTaxesUsa\Core\Checkout\Cart\Tax;
 
 use Shopware\Core\Checkout\Cart\Cart;
 use Shopware\Core\Checkout\Cart\TaxProvider\AbstractTaxProvider;
@@ -16,9 +16,9 @@ use Shopware\Core\Checkout\Cart\Tax\Struct\CalculatedTax;
 use Shopware\Core\Checkout\Cart\Tax\Struct\CalculatedTaxCollection;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
 use Shopware\Core\System\SystemConfig\SystemConfigService;
-use InoceanSalesTaxesCanada\Config\Constants;
+use InoceanSalesTaxesUsa\Config\Constants;
 
-class CanadaTaxProvider extends AbstractTaxProvider
+class UsaTaxProvider extends AbstractTaxProvider
 {
 
     private SystemConfigService $systemConfigService;
@@ -40,7 +40,7 @@ class CanadaTaxProvider extends AbstractTaxProvider
             return new TaxProviderResult([]);
         }
 
-        $province = $address->getCountryState()->getShortCode() ?? Constants::DEFAULT_PROVINCE;
+        $province = $address->getCountryState()->getShortCode() ?? Constants::DEFAULT_STATE;
 
         foreach ($cart->getLineItems() as $lineItem) {
             $originalTaxRate = $lineItem->getPrice()->getCalculatedTaxes()->first()?->getTaxRate() ?? $this->getTaxRateByName('TAX-FREE');
@@ -125,9 +125,9 @@ class CanadaTaxProvider extends AbstractTaxProvider
     private function getTaxRatesByProvince(string $province): array
     {
         $provinceCode = substr(strtoupper($province), -2);
-	    $configValue = str_replace(' ', '', (string)$this->systemConfigService->get('InoceanSalesTaxesCanada.config.CanadaTax'.$provinceCode));
+	    $configValue = str_replace(' ', '', (string)$this->systemConfigService->get('InoceanSalesTaxesUsa.config.UsaTax'.$provinceCode));
         if (!$configValue) {
-            return [$this->getTaxRateByName('GST only')];
+            return [$this->getTaxRateByName('US COMBINED TAX')];
         }
         return array_map('floatval', explode(',', $configValue));
     }

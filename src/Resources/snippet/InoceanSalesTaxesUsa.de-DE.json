@@ -3,7 +3,7 @@
         "grossTaxInformation": "Preise inkl. Steuern",
         "netTaxInformation": "Preise excl. Steuern"
     },
-    "salseTaxCanada": {
+    "salseTaxUsa": {
         "checkout": {
             "summary": {
                 "taxRateNotice": "Die Steuersätze werden auf der Checkout-Seite angezeigt.",

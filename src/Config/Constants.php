@@ -11,15 +11,13 @@ namespace InoceanSalesTaxesUSA\Config;
 
 class Constants
 {
-    const RULE_NAME = 'Customer from USA';
-    const USA_RULE_ID = '0197db2b54907752b70bfbc8711e54a3';
-    const TAX_PROVIDER_ID = '0197db31c0a37b849dc1195985ce063b';
+    const RULE_NAME = 'Customer from U.S. - for Tax Provider';
+    const USA_RULE_ID = '77b5387e345f40d28641e0b6dd278410';
+    const TAX_PROVIDER_ID = '46875ffca8844b448751c635b090ea50';
     const TAXES = [        
-        ['id' => '0197c94d91ed734a97ba618257880791', 'tax_rate' => 12, 'name' => 'GST + PST/QST', 'position' => 0],
-        ['id' => '0197c94d91ed734a97ba618257f6b4c7', 'tax_rate' => 13, 'name' => 'HST', 'position' => 0],
-        ['id' => '0197c94d91ed734a97ba618256bd262f', 'tax_rate' => 5, 'name' => 'GST only', 'position' => 0],
-        ['id' => '0197c94d91ed734a97ba618257c2185e', 'tax_rate' => 0, 'name' => 'TAX-FREE', 'position' => 0],
+        ['id' => 'a10512c6301e49dfaec634f169082078', 'tax_rate' => 10, 'name' => 'US COMBINED TAX', 'position' => 0],
+        ['id' => '60cd957d3d174950874f25726c33721f', 'tax_rate' => 0, 'name' => 'TAX-FREE', 'position' => 0],
     ];
     const DEFAULT_COUNTRY = 'US';
-    const DEFAULT_PROVINCE = 'LA';
+    const DEFAULT_STATE = 'LA';
 }

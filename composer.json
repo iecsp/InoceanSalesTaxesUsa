@@ -1,6 +1,6 @@
 {
   "name": "inocean/sales-taxes-usa",
-  "description": "This plugin implements different tax rates for USA based on provinces, including multiple tax rates.",
+  "description": "This plugin implements different tax rates for USA, including multiple tax rates.",
   "version": "1.0.0",
   "type": "shopware-platform-plugin",
   "license": "proprietary",
@@ -18,8 +18,8 @@
     "plugin-icon": "src/Resources/config/plugin.png",
     "copyright": "(c) by Inocean Technology (iecsp.com)",
     "label": {
-      "en-GB": "Usa Tax Provider",
-      "de-DE": "Kanadischer Steueranbieter"
+      "en-GB": "USA Tax Provider",
+      "de-DE": "USA Steueranbieter"
     }
   },
   "autoload": {

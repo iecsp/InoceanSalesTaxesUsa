@@ -7,7 +7,7 @@
  * holder, unless otherwise permitted by law.
  */
 
-namespace InoceanSalesTaxesCanada;
+namespace InoceanSalesTaxesUsa;
 
 use Shopware\Core\Defaults;
 use Shopware\Core\Framework\Plugin;
@@ -20,10 +20,10 @@ use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsAnyFilter;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
 use Shopware\Core\Framework\Context;
-use InoceanSalesTaxesCanada\Config\Constants;
-use InoceanSalesTaxesCanada\Core\Checkout\Cart\Tax\CanadaTaxProvider;
+use InoceanSalesTaxesUsa\Config\Constants;
+use InoceanSalesTaxesUsa\Core\Checkout\Cart\Tax\UsaTaxProvider;
 
-class InoceanSalesTaxesCanada extends Plugin
+class InoceanSalesTaxesUsa extends Plugin
 {
 
 	public function install(InstallContext $installContext): void
@@ -35,11 +35,11 @@ class InoceanSalesTaxesCanada extends Plugin
 
         $ruleRepository = $container->get('rule.repository');
         $criteria = new Criteria();
-        $criteria->addFilter(new EqualsFilter('id', Constants::CANADA_RULE_ID));
+        $criteria->addFilter(new EqualsFilter('id', Constants::USA_RULE_ID));
         $ruleId = $ruleRepository->searchIds($criteria, $context)->firstId();
         if (!$ruleId) {
             $ruleRepository->create([[
-                'id' => Constants::CANADA_RULE_ID,
+                'id' => Constants::USA_RULE_ID,
                 'name' => Constants::RULE_NAME,
                 'priority' => 1,
                 'createdAt' => (new \DateTime())->format(Defaults::STORAGE_DATE_TIME_FORMAT),
@@ -50,13 +50,13 @@ class InoceanSalesTaxesCanada extends Plugin
         if ($countryId) {
             $ruleConditionRepository = $container->get('rule_condition.repository');
             $criteria = new Criteria();
-            $criteria->addFilter(new EqualsFilter('ruleId', Constants::CANADA_RULE_ID));
+            $criteria->addFilter(new EqualsFilter('ruleId', Constants::USA_RULE_ID));
             $ruleConditionId = $ruleConditionRepository->searchIds($criteria, $context)->firstId();
             if (!$ruleConditionId) {
                 $ruleConditionRepository->create([[
                     'id' => Uuid::randomHex(),
-                    'type' => 'customerBillingCountry',
-                    'ruleId' => Constants::CANADA_RULE_ID,
+                    'type' => 'customerShippingCountry',
+                    'ruleId' => Constants::USA_RULE_ID,
                     'value' => ['operator' => '=', 'countryIds' => [$countryId]],
                     'createdAt' => (new \DateTime())->format(Defaults::STORAGE_DATE_TIME_FORMAT),
                 ]], $context);
@@ -78,21 +78,21 @@ class InoceanSalesTaxesCanada extends Plugin
 
             $taxProviderData = [
                 'id' => Constants::TAX_PROVIDER_ID,
-                'identifier' => CanadaTaxProvider::class,
-                'name' => 'Canada Sales Tax Provider',
+                'identifier' => UsaTaxProvider::class,
+                'name' => 'U.S. Tax Provider',
                 'active' => true,
                 'priority' => 1,
-                'availabilityRuleId' => Constants::CANADA_RULE_ID,
+                'availabilityRuleId' => Constants::USA_RULE_ID,
                 'createdAt' => (new \DateTime())->format(Defaults::STORAGE_DATE_TIME_FORMAT),
                 'translations' => [],
             ];
 
             if ($enGbLanguageId) {
-                $taxProviderData['translations'][$enGbLanguageId] = ['name' => 'Canada Sales Tax Provider'];
+                $taxProviderData['translations'][$enGbLanguageId] = ['name' => 'U.S. Tax Provider'];
             }
 
             if ($deDeLanguageId) {
-                $taxProviderData['translations'][$deDeLanguageId] = ['name' => 'Kanada Umsatzsteuer-Anbieter'];
+                $taxProviderData['translations'][$deDeLanguageId] = ['name' => 'U.S. Umsatzsteuer-Anbieter'];
             }
 
             $taxProviderRepository->create([$taxProviderData], $context);
