@@ -7,7 +7,7 @@
  * holder, unless otherwise permitted by law.
  */
 
-namespace InoceanSalesTaxesUSA\Config;
+namespace InoceanSalesTaxesUsa\Config;
 
 class Constants
 {
@@ -16,7 +16,7 @@ class Constants
     const TAX_PROVIDER_ID = '46875ffca8844b448751c635b090ea50';
     const TAXES = [        
         ['id' => 'a10512c6301e49dfaec634f169082078', 'tax_rate' => 10, 'name' => 'US COMBINED TAX', 'position' => 0],
-        ['id' => '60cd957d3d174950874f25726c33721f', 'tax_rate' => 0, 'name' => 'TAX-FREE', 'position' => 0],
+        ['id' => '60cd957d3d174950874f25726c33721f', 'tax_rate' => 0, 'name' => 'US TAX-FREE', 'position' => 0],
     ];
     const DEFAULT_COUNTRY = 'US';
     const DEFAULT_STATE = 'LA';

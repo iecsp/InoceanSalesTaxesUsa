@@ -11,7 +11,12 @@
                 "shippingTotalPrice": "Versandkosten:",
                 "shippingTaxRate": "Steuersatz:",
                 "shippingTax": "Steuerbetrag:",
-                "shippingDelivered": "Voraussichtliche Lieferzeit:"
+                "shippingDelivered": "Voraussichtliche Lieferzeit:",
+                "taxName1":"State Rate",
+                "taxName2":"County Rate",
+                "taxName3":"City Rate",
+                "taxName4":"Special Rate",
+                "riskLevel":"Risk Level"
             }
         }
     }

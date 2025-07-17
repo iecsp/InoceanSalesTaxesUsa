@@ -1,14 +1,24 @@
 {% sw_extends '@Storefront/storefront/page/checkout/summary/summary-tax.html.twig' %}
 
-{% set defaultShippingCountry = context.customer.defaultShippingAddress.country.name %}
-
-{% block page_checkout_summary_tax_label %}
-    {% if defaultShippingCountry == 'Canada' %}
-        {% set calculatedTaxRate = taxItem.taxRate ?? 0 %}
-        <dt class="col-7 checkout-aside-summary-label summary-tax">
-            {% if calculatedTaxRate != 0 %}+ {{ calculatedTaxRate }}%{% endif %} {{ calculatedTaxRate | getTaxName(app.request.locale | slice(0, 2)) }}
-        </dt>
-    {% else %}
-        {{ parent() }}
-    {% endif %}
+{% block component_checkout_summary_tax_item %}
+    {#
+      Iterate over each tax individually. Do not group them by tax rate.
+      This is required for US taxes where multiple taxes can have the same rate but must be displayed separately.
+      The `context.cart.price.calculatedTaxes` is expected to be an instance of UsaCalculatedTaxCollection,
+      which preserves all individual tax items.
+    #}
+    {% for tax in context.cart.price.calculatedTaxes %}
+        {% block page_checkout_summary_tax %}
+            {% block page_checkout_summary_tax_label %}
+                <dt class="col-7 checkout-aside-summary-label summary-tax">
+                    {{ ('salseTaxUsa.checkout.summary.taxName' ~ loop.index)|trans }} {{ tax.taxRate }}
+                </dt>
+            {% endblock %}
+            {% block page_checkout_summary_tax_value %}
+            <dd class="col-5 checkout-aside-summary-value summary-tax">
+                {{ tax.tax|currency }}
+            </dd>
+            {% endblock %}
+        {% endblock %}
+    {% endfor %}
 {% endblock %}

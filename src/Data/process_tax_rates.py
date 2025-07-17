@@ -2,7 +2,7 @@ import os
 import pandas as pd
 import json
 
-def create_json_from_csvs(data_folder='Data', output_file='us_tax_rates.json'):
+def create_json_from_csvs(data_folder='RawData', output_file='TaxRates-US.json'):
     """
     读取指定文件夹中的所有州税率CSV文件，并将它们合并成一个JSON文件。
 
@@ -12,20 +12,18 @@ def create_json_from_csvs(data_folder='Data', output_file='us_tax_rates.json'):
     """
     # 最终的JSON结构
     us_tax_rates = {
-        "us_tax_rates": {
-            "last_updated": "2025-07-16",
-            "states": {}
-        }
+        "last_updated": "2025-07-16",
+        "states": {}
     }
 
     # 风险等级的映射关系
     # 注意：您可以根据需要修改此映射。CSV中的数字将被替换为相应的文本。
     risk_level_map = {
-        0: "Low",
-        1: "Low",
-        2: "Medium",
-        3: "High",
-        4: "Very High"
+        0: "L",
+        1: "L",
+        2: "M",
+        3: "H",
+        4: "VH"
     }
 
     print(f"开始处理 '{data_folder}' 文件夹中的文件...")
@@ -57,36 +55,37 @@ def create_json_from_csvs(data_folder='Data', output_file='us_tax_rates.json'):
             df = pd.read_csv(file_path)
 
             # 获取州的基本信息 (从第一行)
-            state_name = df.iloc[0]['State']
-            state_rate = str(df.iloc[0]['StateRate'])
+            # state_name = df.iloc[0]['State']
+            # state_rate = str(df.iloc[0]['StateRate'])
 
-            state_data = {
-                "state_name": state_name,
-                "state_rate": state_rate,
-                "zip_codes": {}
-            }
+            state_data = {}
 
             # 遍历DataFrame中的每一行来填充zip_codes
+            # INSERT_YOUR_CODE
+            # 这是因为在读取CSV文件时，pandas会自动将数字字符串转换为整数。
+            # 如果邮政编码以零开头，整数表示将丢失这些前导零。
+            # 为了避免这种情况，我们可以在读取CSV时指定dtype参数，将ZipCode列读取为字符串。
+            df = pd.read_csv(file_path, dtype={'ZipCode': str})
             for index, row in df.iterrows():
                 zip_code = str(row['ZipCode'])
                 
                 # 获取并转换风险等级
                 risk_level_num = row.get('RiskLevel', -1) # 使用.get()以防该列不存在
-                risk_level_str = risk_level_map.get(risk_level_num, "Unknown")
+                # risk_level_str = risk_level_map.get(risk_level_num, "Unknown")
 
                 zip_data = {
-                    "tax_region_name": row['TaxRegionName'],
-                    "estimated_combined_rate": str(row['EstimatedCombinedRate']),
-                    "state_rate": str(row['StateRate']),
-                    "estimated_county_rate": str(row['EstimatedCountyRate']),
-                    "estimated_city_rate": str(row['EstimatedCityRate']),
-                    "estimated_special_rate": str(row['EstimatedSpecialRate']),
-                    "risk_level": risk_level_str
+                    "rgn": row['TaxRegionName'],
+                    "cbr": str(row['EstimatedCombinedRate']),
+                    "str": str(row['StateRate']),
+                    "ctr": str(row['EstimatedCountyRate']),
+                    "cir": str(row['EstimatedCityRate']),
+                    "spr": str(row['EstimatedSpecialRate']),
+                    "rsl": risk_level_num
                 }
-                state_data["zip_codes"][zip_code] = zip_data
+                state_data[zip_code] = zip_data
             
             # 将该州的数据添加到主字典中
-            us_tax_rates["us_tax_rates"]["states"][state_abbr] = state_data
+            us_tax_rates["states"][row['State']] = state_data
 
         except Exception as e:
             print(f"处理文件 {file_name} 时出错: {e}")

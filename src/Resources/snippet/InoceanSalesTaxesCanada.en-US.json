@@ -11,7 +11,13 @@
                 "shippingTotalPrice": "Shipping Amount:",
                 "shippingTaxRate": "Tax Rate:",
                 "shippingTax": "Tax Amount:",
-                "shippingDelivered": "Estimated Delivery Time:"
+                "shippingDelivered": "Estimated Delivery Time:",
+                "taxRegionName":"Tax Region Name",
+                "taxName1":"State Rate",
+                "taxName2":"County Rate",
+                "taxName3":"City Rate",
+                "taxName4":"Special Rate",
+                "riskLevel":"Risk Level"
             }
         }
     },
