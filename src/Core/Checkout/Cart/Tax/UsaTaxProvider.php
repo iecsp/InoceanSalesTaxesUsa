@@ -72,30 +72,32 @@ class UsaTaxProvider extends AbstractTaxProvider
         $deliveryTaxes = [];
         $shippingTotalPrice = $cart->getShippingCosts()->getTotalPrice() ?? 0;
 
-        foreach ($cart->getDeliveries() as $delivery) {
-            $calculatedDeliveryTaxes = [];
-            foreach ($delivery->getPositions() as $position) {
-                $shippingMethod = $delivery->getShippingMethod();
-                $taxId = $shippingMethod->getTaxId();
-                $originalDeliveryTaxRate = $shippingMethod->getTax()?->getTaxRate() ?? $this->getTaxRateByName('US TAX-FREE');
+        if ($freightTaxable) {
+            foreach ($cart->getDeliveries() as $delivery) {
+                $calculatedDeliveryTaxes = [];
+                foreach ($delivery->getPositions() as $position) {
+                    $shippingMethod = $delivery->getShippingMethod();
+                    $taxId = $shippingMethod->getTaxId();
+                    $originalDeliveryTaxRate = $shippingMethod->getTax()?->getTaxRate() ?? $this->getTaxRateByName('US TAX-FREE');
 
-                if ($taxId === Constants::TAXES[1]['id']) {
-                    $deliveryTaxRates = [$this->getTaxRateByName('US TAX-FREE')];
-                } elseif ($taxId === Constants::TAXES[0]['id']) {
-                    $deliveryTaxRates = $this->getTaxRatesByZipCode($zipCode, $state, $showTaxBreakdown);
-                } else {
-                    $deliveryTaxRates = [$originalDeliveryTaxRate];
+                    if ($taxId === Constants::TAXES[1]['id']) {
+                        $deliveryTaxRates = [$this->getTaxRateByName('US TAX-FREE')];
+                    } elseif ($taxId === Constants::TAXES[0]['id']) {
+                        $deliveryTaxRates = $this->getTaxRatesByZipCode($zipCode, $state, $showTaxBreakdown);
+                    } else {
+                        $deliveryTaxRates = [$originalDeliveryTaxRate];
+                    }
+
+                    foreach ($deliveryTaxRates as $deliveryTaxRate) {
+                        $deliveryTaxedPrice = $shippingTotalPrice * $deliveryTaxRate / 100;
+                        $finalDeliveryTaxRate = $deliveryTaxRate;
+
+                        $calculatedDeliveryTax = new CalculatedTax($deliveryTaxedPrice, $finalDeliveryTaxRate, $shippingTotalPrice);
+                        $calculatedDeliveryTaxes[] = $calculatedDeliveryTax;
+                        $finalCartTaxes[] = $calculatedDeliveryTax;
+                    }
+                    $deliveryTaxes[$position->getIdentifier()] = new UsaCalculatedTaxCollection($calculatedDeliveryTaxes);
                 }
-
-                foreach ($deliveryTaxRates as $deliveryTaxRate) {
-                    $deliveryTaxedPrice = $freightTaxable ? ($shippingTotalPrice * $deliveryTaxRate / 100) : 0;
-                    $finalDeliveryTaxRate = $freightTaxable ? $deliveryTaxRate : 0;
-
-                    $calculatedDeliveryTax = new CalculatedTax($deliveryTaxedPrice, $finalDeliveryTaxRate, $shippingTotalPrice);
-                    $calculatedDeliveryTaxes[] = $calculatedDeliveryTax;
-                    $finalCartTaxes[] = $calculatedDeliveryTax;
-                }
-                $deliveryTaxes[$position->getIdentifier()] = new UsaCalculatedTaxCollection($calculatedDeliveryTaxes);
             }
         }
 

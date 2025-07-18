@@ -24,3 +24,20 @@
         margin-bottom: $spacer-sm;
     }
 }
+.checkout-aside-summary-list {
+    .tax-details {
+        padding-bottom: 0.5rem;
+    }
+    .summary-tax {
+        font-size: smaller;
+        &.checkout-aside-summary-label {
+            padding-left: 1rem;
+        }
+    }
+}
+.line-item-tax-price {
+    .line-item-product-number {
+        font-size: small;
+        margin-bottom: 0.25rem;
+    }
+}

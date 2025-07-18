@@ -12,11 +12,7 @@
     {% for calculatedTax in lineItem.price.calculatedTaxes %}
         <div class="line-item-product-number">
         {% if defaultShippingCountry == 'US' %}
-            {% if salesTaxUsa.config.TaxBreakdown == 1 %}
-                {{ ('salseTaxUsa.checkout.summary.taxName' ~ loop.index)|trans }} ({{ calculatedTax.taxRate }}%)
-            {% else %}
-                {{ 'salseTaxUsa.checkout.summary.combinedRate1'|trans }} ({{ calculatedTax.taxRate }}%)
-            {% endif %}
+            ({{ calculatedTax.taxRate }}%) {{ calculatedTax.tax|currency }}
         {% endif %}
 
         {% set calculatedTaxValue = calculatedTax.tax ?? 0 %}

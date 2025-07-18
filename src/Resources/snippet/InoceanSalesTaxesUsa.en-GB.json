@@ -13,7 +13,7 @@
                 "shippingTax": "Tax Amount:",
                 "shippingDelivered": "Estimated Delivery Time:",
                 "taxRegionName":"Tax Region Name",
-                "TaxDetail": "TAX BREAKDOWN:",
+                "TaxDetail": "Tax Breakdown:",
                 "taxName1":"State Rate",
                 "taxName2":"County Rate",
                 "taxName3":"City Rate",
@@ -25,7 +25,7 @@
                 "taxName0":"No Shipping Tax",
                 "combinedRate1": "Combined Tax Rate",
                 "combinedRate2": "Shipping Tax Rate",
-                "shippingTaxDetail": "SHIPPING TAX BREAKDOWN:",
+                "shippingTaxDetail": "Shipping Tax Breakdown:",
                 "riskLevel":"Risk Level"
             }
         }

@@ -1,43 +1,43 @@
 {
     "general": {
-        "grossTaxInformation": "Prices incl. Tax",
-        "netTaxInformation": "Prices excl. Tax"
+        "grossTaxInformation": "Preise inkl. Steuern",
+        "netTaxInformation": "Preise exkl. Steuern"
     },
     "salseTaxUsa": {
         "checkout": {
             "summary": {
-                "taxRateNotice": "Tax rates will be displayed on the checkout page.",
-                "shippingMethod": "📦 Shipping Method:",
-                "shippingTotalPrice": "Shipping Amount:",
-                "shippingTaxRate": "Tax Rate:",
-                "shippingTax": "Tax Amount:",
-                "shippingDelivered": "Estimated Delivery Time:",
-                "taxRegionName":"Tax Region Name",
-                "TaxDetail": "TAX BREAKDOWN:",
-                "taxName1":"State Rate",
-                "taxName2":"County Rate",
-                "taxName3":"City Rate",
-                "taxName4":"Special Rate",
-                "taxName5":"State Rate",
-                "taxName6":"County Rate",
-                "taxName7":"City Rate",
-                "taxName8":"Special Rate",
-                "taxName0":"No Shipping Tax",
-                "combinedRate1": "Combined Tax Rate",
-                "combinedRate2": "Shipping Tax Rate",
-                "shippingTaxDetail": "SHIPPING TAX BREAKDOWN:",
-                "riskLevel":"Risk Level"
+                "taxRateNotice": "Steuersätze werden auf der Checkout-Seite angezeigt.",
+                "shippingMethod": "📦 Versandart:",
+                "shippingTotalPrice": "Versandkosten:",
+                "shippingTaxRate": "Steuersatz:",
+                "shippingTax": "Steuerbetrag:",
+                "shippingDelivered": "Voraussichtliche Lieferzeit:",
+                "taxRegionName": "Steuerregion",
+                "TaxDetail": "Steueraufschlüsselung:",
+                "taxName1": "Bundesstaatsteuer",
+                "taxName2": "Landkreissteuer",
+                "taxName3": "Stadtsteuer",
+                "taxName4": "Sondersteuer",
+                "taxName5": "Bundesstaatsteuer",
+                "taxName6": "Landkreissteuer",
+                "taxName7": "Stadtsteuer",
+                "taxName8": "Sondersteuer",
+                "taxName0": "Keine Versandsteuer",
+                "combinedRate1": "Gesamter Steuersatz",
+                "combinedRate2": "Versandsteuersatz",
+                "shippingTaxDetail": "Versandsteuer-Aufschlüsselung:",
+                "riskLevel": "Risikostufe"
             }
         }
     },
     "document": {
         "lineItems": {
             "header": {
-                "tax": "Tax"
+                "tax": "Steuer"
             },
-            "tax": "plus %taxRate%% Tax:",
-            "inclVAT": "Incl. Tax",
-            "exclVAT": "Excl. Tax"
+            "tax": "zzgl. %taxRate%% Steuer:",
+            "inclVAT": "inkl. Steuer",
+            "exclVAT": "exkl. Steuer"
         }
     }
 }

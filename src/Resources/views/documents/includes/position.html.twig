@@ -79,11 +79,10 @@ All blocks of this template are available in the template which renders this tem
                         {% block document_line_item_table_row_tax_rate %}
                             <td class="align-right">
                             {% block document_line_item_table_column_tax_rate %}
-                                {% set shippingCountry = order.deliveries.first.getShippingOrderAddress.country.translated.name %}
-                                {% if shippingCountry == 'Canada' %}
-                                    {% for tax in lineItem.price.calculatedTaxes %}
-                                        {% set calculatedTaxRate = tax.taxRate ?? 0 %}
-                                        {% if calculatedTaxRate != 0 %}+ {{ calculatedTaxRate }}%{% endif %} {{ calculatedTaxRate | getTaxName(app.request.locale | slice(0, 2)) }}{% if loop.last %}{% else %}<br>{% endif %}
+                                {% set shippingCountry = order.deliveries.first.getShippingOrderAddress.country.iso %}
+                                {% if shippingCountry == 'US' %}
+                                    {% for tax in lineItem.price.calculatedTaxes %}                                        
+                                        ({{ tax.taxRate }}%) {{ tax.tax|currency }} {% if loop.last %}{% else %}<br>{% endif %}
                                     {% endfor %}
                                 {% else %}
                                     {% for tax in lineItem.price.taxRules %}

@@ -4,10 +4,10 @@
 
 {% block page_account_order_item_detail_vat_label %}
     {% if shipppingCountryCode == 'US' %}
-        {% if salesTaxUsa.config.TaxBreakdown == 1 %}
+        {% if config('InoceanSalesTaxesUsa.config.TaxBreakdown') %}
             {% if loop.index == 1 %}<dt class="col-12 tax-details">{{ ('salseTaxUsa.checkout.summary.TaxDetail' )|trans }}</dt>{% endif %}
             {% if loop.index == 5 && calculatedTax.taxRate != 0 %}<dt class="col-12 tax-details">{{ ('salseTaxUsa.checkout.summary.shippingTaxDetail' )|trans }}</dt>{% endif %}
-            <dt class="col-6 col-md-8">
+            <dt class="col-6 col-md-8 order-history-detail summary-tax">
                 {% if calculatedTax.taxRate == 0 && loop.index == 5 %}
                     {{ ('salseTaxUsa.checkout.summary.taxName0' )|trans }}
                 {% else %}
@@ -15,7 +15,7 @@
                 {% endif %}
             </dt>
         {% else %}
-            <dt class="col-6 col-md-8">
+            <dt class="col-6 col-md-8 order-history-detail summary-tax">
                 {{ ('salseTaxUsa.checkout.summary.combinedRate' ~ loop.index)|trans }} ({{ calculatedTax.taxRate }}%)
             </dt>
         {% endif %}
