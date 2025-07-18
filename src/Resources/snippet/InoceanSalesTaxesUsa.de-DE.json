@@ -1,23 +1,43 @@
 {
     "general": {
-        "grossTaxInformation": "Preise inkl. Steuern",
-        "netTaxInformation": "Preise excl. Steuern"
+        "grossTaxInformation": "Prices incl. Tax",
+        "netTaxInformation": "Prices excl. Tax"
     },
     "salseTaxUsa": {
         "checkout": {
             "summary": {
-                "taxRateNotice": "Die Steuersätze werden auf der Checkout-Seite angezeigt.",
-                "shippingMethod": "📦 Versandmethode:",
-                "shippingTotalPrice": "Versandkosten:",
-                "shippingTaxRate": "Steuersatz:",
-                "shippingTax": "Steuerbetrag:",
-                "shippingDelivered": "Voraussichtliche Lieferzeit:",
+                "taxRateNotice": "Tax rates will be displayed on the checkout page.",
+                "shippingMethod": "📦 Shipping Method:",
+                "shippingTotalPrice": "Shipping Amount:",
+                "shippingTaxRate": "Tax Rate:",
+                "shippingTax": "Tax Amount:",
+                "shippingDelivered": "Estimated Delivery Time:",
+                "taxRegionName":"Tax Region Name",
+                "TaxDetail": "TAX BREAKDOWN:",
                 "taxName1":"State Rate",
                 "taxName2":"County Rate",
                 "taxName3":"City Rate",
                 "taxName4":"Special Rate",
+                "taxName5":"State Rate",
+                "taxName6":"County Rate",
+                "taxName7":"City Rate",
+                "taxName8":"Special Rate",
+                "taxName0":"No Shipping Tax",
+                "combinedRate1": "Combined Tax Rate",
+                "combinedRate2": "Shipping Tax Rate",
+                "shippingTaxDetail": "SHIPPING TAX BREAKDOWN:",
                 "riskLevel":"Risk Level"
             }
+        }
+    },
+    "document": {
+        "lineItems": {
+            "header": {
+                "tax": "Tax"
+            },
+            "tax": "plus %taxRate%% Tax:",
+            "inclVAT": "Incl. Tax",
+            "exclVAT": "Excl. Tax"
         }
     }
 }

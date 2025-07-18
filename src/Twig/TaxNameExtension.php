@@ -31,40 +31,6 @@ class TaxNameExtension extends AbstractExtension
 
     public function getTaxName(string $zipCode, string $state): string
     {
-        $jsonPath = __DIR__ . '/../Config/TaxRates-US.json';
-
-        if (!file_exists($jsonPath)) {
-            return [];
-        }
-
-        $jsonContent = file_get_contents($jsonPath);
-        if ($jsonContent === false) {
-            return [];
-        }
-
-        $taxData = json_decode($jsonContent, true);
-
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            return [];
-        }
-
-        $rowMap = [
-            'rgn' => 'Region Name',
-            'cbr' => 'Combined Rate',
-            'str' => 'State Rate',
-            'ctr' => 'County Rate',
-            'cir' => 'City Rate',
-            'spr' => 'Special Rate'
-        ];
-
-        $stateCode = substr(strtoupper($state), -2);
-
-        if (isset($taxData['states'][$stateCode][$zipCode])) {
-            $zipData = $taxData['states'][$stateCode][$zipCode];
-            // var_dump($zipData);
-            return $zipData['cbr'];
-        }
-
         return 'Tax';
     }
 

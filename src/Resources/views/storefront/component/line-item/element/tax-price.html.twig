@@ -10,10 +10,13 @@
 
 {% block component_line_item_tax_price_inner %}
     {% for calculatedTax in lineItem.price.calculatedTaxes %}
-        {% set calculatedTaxRate = calculatedTax.taxRate ?? 0 %}
         <div class="line-item-product-number">
         {% if defaultShippingCountry == 'US' %}
-            {% if calculatedTaxRate != 0 %}+{% endif %} {{ calculatedTaxRate | getTaxName(app.request.locale | slice(0, 2)) }}
+            {% if salesTaxUsa.config.TaxBreakdown == 1 %}
+                {{ ('salseTaxUsa.checkout.summary.taxName' ~ loop.index)|trans }} ({{ calculatedTax.taxRate }}%)
+            {% else %}
+                {{ 'salseTaxUsa.checkout.summary.combinedRate1'|trans }} ({{ calculatedTax.taxRate }}%)
+            {% endif %}
         {% endif %}
 
         {% set calculatedTaxValue = calculatedTax.tax ?? 0 %}
@@ -27,3 +30,7 @@
         </div>
     {% endfor %}
 {% endblock %}
+
+
+
+        
