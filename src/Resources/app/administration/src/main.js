@@ -3,3 +3,4 @@ import './module/sw-order/view/sw-order-detail-general';
 import './snippet/de-DE.json';
 import './snippet/en-GB.json';
 import './snippet/en-US.json';
+import './scss/base.scss';

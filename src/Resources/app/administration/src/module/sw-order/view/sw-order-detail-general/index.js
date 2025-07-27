@@ -20,12 +20,12 @@ Component.override('sw-order-detail-general', {
             this.order.lineItems.forEach(lineItem => {
                 if (lineItem.payload && Array.isArray(lineItem.payload.inoceanUsaTaxInfo)) {
                     lineItem.payload.inoceanUsaTaxInfo.forEach(taxInfo => {
-                        const rateKey = taxInfo.rate;
+                        const rateKey = taxInfo.name;
 
                         if (!taxAggregation[rateKey]) {
                             taxAggregation[rateKey] = {
-                                taxRate: taxInfo.rate,
                                 taxName: taxInfo.name,
+                                taxRate: taxInfo.rate,
                                 taxPriceTotal: 0,
                             };
                         }
@@ -37,12 +37,12 @@ Component.override('sw-order-detail-general', {
 
             const aggregatedTaxes = Object.values(taxAggregation);
 
-            aggregatedTaxes.sort((a, b) => a.taxRate - b.taxRate);
+            // aggregatedTaxes.sort((a, b) => a.taxRate - b.taxRate);
             return aggregatedTaxes.map(tax => ({
                 taxDetails: {
+                    name: tax.taxName,
                     rate: tax.taxRate,
                     tax: tax.taxPriceTotal,
-                    name: tax.taxName,
                 },
             }));
         },
@@ -61,8 +61,8 @@ Component.override('sw-order-detail-general', {
 
                         if (!shippingTaxAggregation[rateKey]) {
                             shippingTaxAggregation[rateKey] = {
-                                taxRate: taxInfo.rate,
                                 taxName: taxInfo.name,
+                                taxRate: taxInfo.rate,
                                 taxPriceTotal: 0,
                             };
                         }
@@ -74,12 +74,12 @@ Component.override('sw-order-detail-general', {
 
             const aggregatedShippingTaxes = Object.values(shippingTaxAggregation);
 
-            aggregatedShippingTaxes.sort((a, b) => a.taxRate - b.taxRate);
+            // aggregatedShippingTaxes.sort((a, b) => a.taxRate - b.taxRate);
             return aggregatedShippingTaxes.map(tax => ({
                 taxDetails: {
+                    name: tax.taxName,
                     rate: tax.taxRate,
                     tax: tax.taxPriceTotal,
-                    name: tax.taxName,
                 },
             }));
         },
