@@ -17,5 +17,29 @@
     "nestedLineItemsModal": {
       "headerTax": "Tax"
     }
+  },
+  "salseTaxUsa": {
+    "order": {
+      "lineItem": {
+        "tax": "Tax"
+      },
+      "summary": {
+          "subtotal": "Total excluding Tax",
+          "groundTotal": "Total including Tax",
+          "totalRounded": "Rounded total including Tax",
+          "taxCombinedRate": "Combined Rate ({taxRate}%)",
+          "taxStateRate": "State Rate ({taxRate}%)",
+          "taxCountyRate": "County Rate ({taxRate}%)",
+          "taxCityRate": "City Rate ({taxRate}%)",
+          "taxSpecialRate": "Special Rate ({taxRate}%)",
+          "taxTAX": "TAX ({taxRate}%)",
+          "taxTAX-FREE": "TAX-FREE",
+          "shippingTaxGST": "+ Shipping GST ({taxRate}%)",
+          "shippingTaxPST": "+ Shipping PST ({taxRate}%)",
+          "shippingTaxQST": "+ Shipping QST ({taxRate}%)",
+          "shippingTaxHST": "+ Shipping HST ({taxRate}%)",
+          "shippingTaxTAX": "+ Shipping TAX ({taxRate}%)"
+      }
+    }
   }
 }

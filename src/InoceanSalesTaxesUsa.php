@@ -120,6 +120,19 @@ class InoceanSalesTaxesUsa extends Plugin
     public function uninstall(UninstallContext $uninstallContext): void
     {
         parent::uninstall($uninstallContext);
+
+        $context = $uninstallContext->getContext();
+
+        if ($uninstallContext->keepUserData()) {
+            return;
+        }
+
+        $this->setActiveFlagForTaxProvider(false, $context);
+        $this->clearTaxProviderRuleAssociation($context);
+        $this->removeTaxProvider($context);
+        $this->removeRuleConditions($context);
+        $this->removeRule($context);
+        $this->removeTaxes($context);
     }
 
     public function activate(ActivateContext $activateContext): void
@@ -146,6 +159,96 @@ class InoceanSalesTaxesUsa extends Plugin
                     'active' => $active,
                 ],
             ], $context);
+        }
+    }
+
+    private function clearTaxProviderRuleAssociation(Context $context): void
+    {
+        $taxProviderRepository = $this->container->get('tax_provider.repository');
+        $criteria = new Criteria();
+        $criteria->addFilter(new EqualsFilter('identifier', UsaTaxProvider::class));
+        
+        $taxProviderId = $taxProviderRepository->searchIds($criteria, $context)->firstId();
+        if ($taxProviderId) {
+            $taxProviderRepository->update([
+                [
+                    'id' => $taxProviderId,
+                    'availabilityRuleId' => null,
+                ],
+            ], $context);
+        }
+    }
+
+    private function removeTaxProvider(Context $context): void
+    {
+        $taxProviderRepository = $this->container->get('tax_provider.repository');
+        $criteria = new Criteria();
+        $criteria->addFilter(new EqualsFilter('identifier', UsaTaxProvider::class));
+        
+        $taxProviderId = $taxProviderRepository->searchIds($criteria, $context)->firstId();
+        if ($taxProviderId) {
+            $taxProviderRepository->delete([
+                ['id' => $taxProviderId]
+            ], $context);
+        }
+    }
+
+    private function removeRuleConditions(Context $context): void
+    {
+        $ruleConditionRepository = $this->container->get('rule_condition.repository');
+        $criteria = new Criteria();
+        $criteria->addFilter(new EqualsFilter('ruleId', Constants::USA_RULE_ID));
+        
+        $ruleConditionIds = $ruleConditionRepository->searchIds($criteria, $context)->getIds();
+        if (!empty($ruleConditionIds)) {
+            $deleteData = array_map(fn($id) => ['id' => $id], $ruleConditionIds);
+            $ruleConditionRepository->delete($deleteData, $context);
+        }
+    }
+
+    private function removeRule(Context $context): void
+    {
+        $ruleRepository = $this->container->get('rule.repository');
+        $criteria = new Criteria();
+        $criteria->addFilter(new EqualsFilter('id', Constants::USA_RULE_ID));
+        
+        $ruleId = $ruleRepository->searchIds($criteria, $context)->firstId();
+        if ($ruleId) {
+            $ruleRepository->delete([
+                ['id' => $ruleId]
+            ], $context);
+        }
+    }
+
+    private function removeTaxes(Context $context): void
+    {
+        $taxRepository = $this->container->get('tax.repository');
+        $criteria = new Criteria();
+        
+        $taxIds = array_map(fn($tax) => $tax['id'], Constants::TAXES);
+        $criteria->addFilter(new EqualsAnyFilter('id', $taxIds));
+        
+        $taxesToRemove = $taxRepository->searchIds($criteria, $context)->getIds();
+        
+        if (!empty($taxesToRemove)) {
+            $productRepository = $this->container->get('product.repository');
+            $shippingMethodRepository = $this->container->get('shipping_method.repository');
+            
+            $productCriteria = new Criteria();
+            $productCriteria->addFilter(new EqualsAnyFilter('taxId', $taxesToRemove));
+            $productsUsingTax = $productRepository->searchIds($productCriteria, $context)->getIds();
+            
+            $shippingMethodCriteria = new Criteria();
+            $shippingMethodCriteria->addFilter(new EqualsAnyFilter('taxId', $taxesToRemove));
+            $shippingMethodsUsingTax = $shippingMethodRepository->searchIds($shippingMethodCriteria, $context)->getIds();
+            
+            $taxesInUse = array_unique(array_merge($productsUsingTax, $shippingMethodsUsingTax));
+            $taxesToActuallyRemove = array_diff($taxesToRemove, $taxesInUse);
+            
+            if (!empty($taxesToActuallyRemove)) {
+                $deleteData = array_map(fn($id) => ['id' => $id], $taxesToActuallyRemove);
+                $taxRepository->delete($deleteData, $context);
+            }
         }
     }
 

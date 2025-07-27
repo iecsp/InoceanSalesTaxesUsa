@@ -1,43 +1,37 @@
 {
-    "general": {
-        "grossTaxInformation": "Preise inkl. Steuern",
-        "netTaxInformation": "Preise exkl. Steuern"
-    },
-    "salseTaxUsa": {
-        "checkout": {
-            "summary": {
-                "taxRateNotice": "Steuersätze werden auf der Checkout-Seite angezeigt.",
-                "shippingMethod": "📦 Versandart:",
-                "shippingTotalPrice": "Versandkosten:",
-                "shippingTaxRate": "Steuersatz:",
-                "shippingTax": "Steuerbetrag:",
-                "shippingDelivered": "Voraussichtliche Lieferzeit:",
-                "taxRegionName": "Steuerregion",
-                "TaxDetail": "Steueraufschlüsselung:",
-                "taxName1": "Bundesstaatsteuer",
-                "taxName2": "Landkreissteuer",
-                "taxName3": "Stadtsteuer",
-                "taxName4": "Sondersteuer",
-                "taxName5": "Bundesstaatsteuer",
-                "taxName6": "Landkreissteuer",
-                "taxName7": "Stadtsteuer",
-                "taxName8": "Sondersteuer",
-                "taxName0": "Keine Versandsteuer",
-                "combinedRate1": "Gesamter Steuersatz",
-                "combinedRate2": "Versandsteuersatz",
-                "shippingTaxDetail": "Versandsteuer-Aufschlüsselung:",
-                "riskLevel": "Risikostufe"
-            }
-        }
-    },
-    "document": {
-        "lineItems": {
-            "header": {
-                "tax": "Steuer"
-            },
-            "tax": "zzgl. %taxRate%% Steuer:",
-            "inclVAT": "inkl. Steuer",
-            "exclVAT": "exkl. Steuer"
-        }
+  "general": {
+    "grossTaxInformation": "Preise inkl. MwSt.",
+    "netTaxInformation": "Preise zzgl. MwSt."
+  },
+  "salseTaxUsa": {
+    "checkout": {
+      "summary": {
+        "taxRateNotice": "Die Steuersätze werden auf der Kassenseite angezeigt.",
+        "shippingMethod": "📦 Versandmethode:",
+        "shippingTotalPrice": "Versandkosten:",
+        "shippingTaxRate": "Steuersatz:",
+        "shippingTax": "Steuerbetrag:",
+        "shippingDelivered": "Voraussichtliche Lieferzeit:"
+      },
+      "taxes": {
+        "taxCombinedRate": "Combined Rate (%taxRate%%)",
+        "taxStateRate": "State Rate (%taxRate%%)",
+        "taxCountyRate": "County Rate (%taxRate%%)",
+        "taxCityRate": "City Rate (%taxRate%%)",
+        "taxSpecialRate": "Special Rate (%taxRate%%)",
+        "taxTAX": "Steuer ({taxRate}%)",
+        "taxTAX-FREE": "STEUERFREI"
+      }
     }
+  },
+  "document": {
+    "lineItems": {
+      "header": {
+        "tax": "Steuer"
+      },
+      "tax": "zzgl. %taxRate%% Steuer:",
+      "inclVAT": "Inkl. MwSt.",
+      "exclVAT": "Zzgl. MwSt."
+    }
+  }
 }

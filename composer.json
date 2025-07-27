@@ -11,15 +11,16 @@
     }
   ],
   "require": {
-    "shopware/core": "~6.6 || ~6.7"
+    "shopware/core": "~6.6.0 || ~6.7.0"
   },
   "extra": {
     "shopware-plugin-class": "InoceanSalesTaxesUsa\\InoceanSalesTaxesUsa",
     "plugin-icon": "src/Resources/config/plugin.png",
     "copyright": "(c) by Inocean Technology (iecsp.com)",
     "label": {
-      "en-GB": "USA Tax Provider",
-      "de-DE": "USA Steueranbieter"
+      "en-GB": "USA Tax Provider for Shopware",
+      "de-DE": "USA Steueranbieter für Shopware",
+      "fr-FR": "Fournisseur de taxes USA pour Shopware"
     }
   },
   "autoload": {

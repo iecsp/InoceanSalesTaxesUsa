@@ -1,0 +1,25 @@
+{
+  "base": "/bundles/inoceansalestaxesusa/administration/",
+  "entryPoints": {
+    "inocean-sales-taxes-usa": {
+      "css": [
+        "/bundles/inoceansalestaxesusa/administration/assets/inocean-sales-taxes-usa-CvlTUI7k.css"
+      ],
+      "dynamic": [],
+      "js": [
+        "/bundles/inoceansalestaxesusa/administration/assets/inocean-sales-taxes-usa-D8-dS9cI.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}

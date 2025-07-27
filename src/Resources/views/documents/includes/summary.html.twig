@@ -16,30 +16,44 @@
                         {% endblock %}
 
                         {% block document_sum_taxes %}
-                            {% for calculatedTax in order.price.calculatedTaxes %}
+                            {% for calculatedTax in order.price.calculatedTaxes.sortByTax %}
                                 <tr>
                                     {% block document_sum_tax_label %}
-                                        {% set shippingCountry = order.deliveries.first.getShippingOrderAddress.country.iso %}
-                                        {% if shippingCountry == 'US' %}                                        
-                                            {% if config('InoceanSalesTaxesUsa.config.TaxBreakdown') %}
-                                                {% if loop.index == 1 %}<td class="align-right">{{ ('salseTaxUsa.checkout.summary.TaxDetail' )|trans }}</td>{% endif %}
-                                                {% if loop.index == 5 && calculatedTax.taxRate != 0 %}<td class="align-right">{{ ('salseTaxUsa.checkout.summary.shippingTaxDetail' )|trans }}</td>{% endif %}
-                                                <td class="align-right">
-                                                    {% if calculatedTax.taxRate == 0 && loop.index == 5 %}
-                                                        {{ ('salseTaxUsa.checkout.summary.taxName0')|trans }}
-                                                    {% else %}
-                                                        {{ ('salseTaxUsa.checkout.summary.taxName' ~ loop.index)|trans }} ({{ calculatedTax.taxRate }}%)
-                                                    {% endif %}
-                                                </td>
-                                            {% else %}
-                                                <td class="align-right">
-                                                    {{ ('salseTaxUsa.checkout.summary.combinedRate' ~ loop.index)|trans }} ({{ calculatedTax.taxRate }}%)
-                                                </td>
-                                            {% endif %}
-                                        
-                                        {% else %}
+                                        {# {% set shippingCountry = order.deliveries.first.getShippingOrderAddress.country.iso %}
+                                        {% if shippingCountry == 'CA' %} #}
+                                            {% set taxTotals = {} %}
+                                            {% set shippingTaxTotals = {} %}
+
+                                            {% for taxItem in order.lineItems %}
+                                                {% if taxItem.payload.inoceanUsaTaxInfo is defined and taxItem.payload.inoceanUsaTaxInfo is not empty %}
+                                                    {% for taxInfo in taxItem.payload.inoceanUsaTaxInfo %}
+                                                        {% set taxName = taxInfo.name %}
+                                                        {% set currentTaxData = taxTotals[taxName]|default({ 'rate': taxInfo.rate, 'total': 0 }) %}
+                                                        {% set newTotal = currentTaxData.total + taxInfo.tax %}
+                                                        {% set updatedTaxData = currentTaxData|merge({ 'total': newTotal }) %}
+                                                        {% set taxTotals = taxTotals|merge({ (taxName): updatedTaxData }) %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                                {% if taxItem.payload.inoceanShippingTaxInfo is defined and taxItem.payload.inoceanShippingTaxInfo is not empty %}
+                                                    {% for tax in taxItem.payload.inoceanShippingTaxInfo %}
+                                                        {% set taxName = tax.name %}
+                                                        {% set currentTaxData = taxTotals[taxName]|default({ 'rate': tax.rate, 'total': 0 }) %}
+                                                        {% set newTotal = currentTaxData.total + tax.tax %}
+                                                        {% set updatedTaxData = currentTaxData|merge({ 'total': newTotal }) %}
+                                                        {% set taxTotals = taxTotals|merge({ (taxName): updatedTaxData }) %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endfor %}
+
+                                            {% for taxName, taxData in taxTotals %}
+                                                {% if taxData.total > 0 && calculatedTax.taxRate == taxData.rate %}
+                                                    <td class="align-right">{{ ('salseTaxUsa.checkout.taxes.tax' ~ taxName)|trans({'%taxRate%': taxData.rate})|sw_sanitize }}</td>
+                                                {% endif %}
+                                            {% endfor %}
+
+                                        {# {% else %}
                                             <td class="align-right">{{ 'document.lineItems.tax'|trans({'%taxRate%': calculatedTax.taxRate})|sw_sanitize }}</td>
-                                        {% endif %}
+                                        {% endif %} #}
                                     {% endblock %}
                                     {% block document_sum_tax_rate %}
                                         <td class="align-right">{{ calculatedTax.tax|currency(currencyIsoCode, languageId) }}</td>

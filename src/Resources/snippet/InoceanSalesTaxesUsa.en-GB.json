@@ -11,22 +11,15 @@
                 "shippingTotalPrice": "Shipping Amount:",
                 "shippingTaxRate": "Tax Rate:",
                 "shippingTax": "Tax Amount:",
-                "shippingDelivered": "Estimated Delivery Time:",
-                "taxRegionName":"Tax Region Name",
-                "TaxDetail": "Tax Breakdown:",
-                "taxName1":"State Rate",
-                "taxName2":"County Rate",
-                "taxName3":"City Rate",
-                "taxName4":"Special Rate",
-                "taxName5":"State Rate",
-                "taxName6":"County Rate",
-                "taxName7":"City Rate",
-                "taxName8":"Special Rate",
-                "taxName0":"No Shipping Tax",
-                "combinedRate1": "Combined Tax Rate",
-                "combinedRate2": "Shipping Tax Rate",
-                "shippingTaxDetail": "Shipping Tax Breakdown:",
-                "riskLevel":"Risk Level"
+                "shippingDelivered": "Estimated Delivery Time:"
+            },
+            "taxes": {
+                "taxCombinedRate": "Combined Rate (%taxRate%%)",
+                "taxStateRate": "State Rate (%taxRate%%)",
+                "taxCountyRate": "County Rate (%taxRate%%)",
+                "taxCityRate": "City Rate (%taxRate%%)",
+                "taxSpecialRate": "Special Rate (%taxRate%%)",
+                "taxTAX-FREE": "TAX-FREE"
             }
         }
     },

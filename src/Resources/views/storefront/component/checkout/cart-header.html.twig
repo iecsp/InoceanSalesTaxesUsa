@@ -14,7 +14,7 @@
                 {% if showTaxPrice %}
                     <div class="col-2 cart-header-tax-price">
                         {% if context.salesChannel.taxCalculationType == 'horizontal' %}
-                            {% set defaultShippingCountry = context.customer.defaultShippingAddress.country.iso %}
+                            {% set defaultShippingCountry = context.customer.activeShippingAddress.country.iso %}
                             {% if defaultShippingCountry != 'US' %}
                                 {% if context.taxState == 'gross' %}
                                     {{ 'checkout.cartHeaderTaxIncludeVat'|trans|sw_sanitize }}
@@ -22,7 +22,7 @@
                                     {{ 'checkout.cartHeaderTaxExcludeVat'|trans|sw_sanitize }}
                                 {% endif %}
                             {% else %}
-                                {{ 'document.lineItems.header.tax'|trans }}
+                                Tax
                             {% endif %}
                         {% endif %}
                     </div>

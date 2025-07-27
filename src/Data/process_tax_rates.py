@@ -13,6 +13,15 @@ def create_json_from_csvs(data_folder='RawData', output_file='TaxRates-US.json')
     # 最终的JSON结构
     us_tax_rates = {
         "last_updated": "2025-07-16",
+        "taxes_map": {
+            "rgn": "Region Name",
+            "cbr": "Combined Rate",
+            "str": "State Rate",
+            "ctr": "County Rate",
+            "cir": "City Rate",
+            "spr": "Special Rate",
+            "rsl": "Risk Level"
+        },
         "states": {}
     }
 

@@ -1,3 +1,26 @@
 {
-  "plugin-reserved": ""
+  "salseTaxUsa": {
+    "order": {
+      "lineItem": {
+        "tax": "Steuer"
+      },
+      "summary": {
+        "subtotal": "Summe ohne Steuer",
+        "groundTotal": "Summe inklusive Steuer",
+        "totalRounded": "Gerundete Summe inklusive Steuer",
+        "taxCombinedRate": "Kombinierter Tarif ({taxRate}%)",
+        "taxStateRate": "Staatsrate ({taxRate}%)",
+        "taxCountyRate": "Kreistarif ({taxRate}%)",
+        "taxCityRate": "Städtetarif ({taxRate}%)",
+        "taxSpecialRate": "Sonderpreis ({taxRate}%)",
+        "taxTAX": "Steuer ({taxRate}%)",
+        "taxTAX-FREE": "STEUERFREI",
+        "shippingTaxGST": "+ Versand-GST ({taxRate}%)",
+        "shippingTaxPST": "+ Versand-PST ({taxRate}%)",
+        "shippingTaxQST": "+ Versand-QST ({taxRate}%)",
+        "shippingTaxHST": "+ Versand-HST ({taxRate}%)",
+        "shippingTaxTAX": "+ Versand-Steuer ({taxRate}%)"
+      }
+    }
+  }
 }

@@ -37,14 +37,15 @@ All blocks of this template are available in the template which renders this tem
                 {% if config.displayPrices %}
                     {% block document_line_item_table_shipping_tax %}
                         <td class="align-right">
-                            {% for tax in order.deliveries.first.shippingCosts.calculatedTaxes %}
-                                {% if tax.taxRate != 0 %}
-                                    {{ ('salseTaxUsa.checkout.summary.taxName' ~ loop.index)|trans }} {{ tax.taxRate }}% 
-                                {% else %}
-                                    {{ ('salseTaxUsa.checkout.summary.taxName0')|trans }}
-                                {% endif %} 
-                                {% if loop.last %}{% else %}<br>{% endif %}
-                            {% endfor %}
+
+                        {% for taxItem in order.lineItems %}
+                            {% if taxItem.payload.inoceanShippingTaxInfo is defined and taxItem.payload.inoceanShippingTaxInfo is not empty %}
+                                {% for tax in taxItem.payload.inoceanShippingTaxInfo %}
+                                    {{ ('salseTaxUsa.checkout.taxes.tax' ~ tax.name)|trans({'%taxRate%': tax.rate})|sw_sanitize }} {% if loop.last %}{% else %}<br>{% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+
                         </td>
                     {% endblock %}
 

@@ -1,26 +1,90 @@
 {% sw_extends '@Storefront/storefront/page/checkout/summary/summary-tax.html.twig' %}
 
-{% block page_checkout_summary_tax_label %}
-    {% set defaultShippingCountry = context.customer.defaultShippingAddress.country.iso %}
-    
-    {% if defaultShippingCountry == 'US' %}
-        {% if config('InoceanSalesTaxesUsa.config.TaxBreakdown') %}
-            {% if loop.index == 1 %}<dt class="col-12 tax-details">{{ ('salseTaxUsa.checkout.summary.TaxDetail' )|trans }}</dt>{% endif %}
-            {% if loop.index == 5 && taxItem.taxRate != 0 %}<dt class="col-12 tax-details">{{ ('salseTaxUsa.checkout.summary.shippingTaxDetail' )|trans }}</dt>{% endif %}
-            <dt class="col-7 checkout-aside-summary-label summary-tax">
-                {% if taxItem.taxRate == 0 && loop.index == 5 %}
-                    {{ ('salseTaxUsa.checkout.summary.taxName0')|trans }}
-                {% else %}
-                    {{ ('salseTaxUsa.checkout.summary.taxName' ~ loop.index)|trans }} ({{ taxItem.taxRate }}%)
-                {% endif %}
-            </dt>
-        {% else %}
-            <dt class="col-7 checkout-aside-summary-label summary-tax">
-                {{ ('salseTaxUsa.checkout.summary.combinedRate' ~ loop.index)|trans }} ({{ taxItem.taxRate }}%)
-            </dt>
-        {% endif %}
-    {% else %}
-        {{ parent() }}
-    {% endif %}
+{% set defaultShippingCountry = context.customer.activeShippingAddress.country.iso %}
 
+{% block page_checkout_summary_taxes %}
+    {% if app.request.attributes.get('_route') === 'frontend.checkout.finish.page' %}
+        {% if defaultShippingCountry == 'US' %}
+            {% set taxTotals = {} %}
+            {% set shippingTaxTotals = {} %}
+
+            {% for taxItem in page.order.lineItems %}
+                {% if taxItem.payload.inoceanUsaTaxInfo is defined and taxItem.payload.inoceanUsaTaxInfo is not empty %}
+                    {% for taxInfo in taxItem.payload.inoceanUsaTaxInfo %}
+                        {% set taxName = taxInfo.name %}
+                        {% set currentTaxData = taxTotals[taxName]|default({ 'rate': taxInfo.rate, 'total': 0 }) %}
+                        {% set newTotal = currentTaxData.total + taxInfo.tax %}
+                        {% set updatedTaxData = currentTaxData|merge({ 'total': newTotal }) %}
+                        {% set taxTotals = taxTotals|merge({ (taxName): updatedTaxData }) %}
+                    {% endfor %}
+                {% endif %}
+                {% if taxItem.payload.inoceanShippingTaxInfo is defined and taxItem.payload.inoceanShippingTaxInfo is not empty %}
+                    {% for tax in taxItem.payload.inoceanShippingTaxInfo %}
+                        {% set taxName = tax.name %}
+                        {% set currentTaxData = taxTotals[taxName]|default({ 'rate': tax.rate, 'total': 0 }) %}
+                        {% set newTotal = currentTaxData.total + tax.tax %}
+                        {% set updatedTaxData = currentTaxData|merge({ 'total': newTotal }) %}
+                        {% set taxTotals = taxTotals|merge({ (taxName): updatedTaxData }) %}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+
+            {% for taxName, taxData in taxTotals %}
+                {% if taxData.total > 0 %}
+                    <dt class="col-7 checkout-aside-summary-label summary-tax">
+                        {{ ('salseTaxUsa.checkout.taxes.tax' ~ taxName)|trans({'%taxRate%': taxData.rate})|sw_sanitize }}
+                    </dt>
+                    <dd class="col-5 checkout-aside-summary-value summary-tax">
+                        {{ taxData.total|currency }}
+                    </dd> 
+                {% endif %}
+            {% endfor %}
+
+        {% else %}
+
+            {% for taxItem in summary.price.calculatedTaxes %}
+                {% if taxItem.taxRate != 0 %}
+                    <dt class="col-7 checkout-aside-summary-label summary-tax">
+                        {{ 'checkout.summaryTax'|trans({
+                            '%rate%': taxItem.taxRate
+                        })|sw_sanitize }}
+                    </dt>
+
+                    <dd class="col-5 checkout-aside-summary-value summary-tax">
+                        {{ taxItem.tax|currency }}
+                    </dd>
+                {% endif %}
+            {% endfor %}
+
+        {% endif %}
+
+    {% else %}
+   
+        {% for taxItem in summary.price.calculatedTaxes %}
+            {% if taxItem.taxRate != 0 %}
+                {% block page_checkout_summary_tax %}
+                    {% block page_checkout_summary_tax_label %}
+                        {% if defaultShippingCountry == 'US' %}
+                            {% set taxName = (taxItem.extensions.taxName.name == 0 ? 'TAX' : taxItem.extensions.taxName.name) %}
+                            <dt class="col-7 checkout-aside-summary-label summary-tax">
+                                {{ ('salseTaxUsa.checkout.taxes.tax' ~ taxName)|trans({'%taxRate%': taxItem.taxRate})|sw_sanitize }}
+                            </dt>
+                        {% else %}
+                            <dt class="col-7 checkout-aside-summary-label summary-tax">
+                                {{ 'checkout.summaryTax'|trans({
+                                    '%rate%': taxItem.taxRate
+                                })|sw_sanitize }}
+                            </dt>
+                        {% endif %}
+                    {% endblock %}
+                    {% block page_checkout_summary_tax_value %}
+                        <dd class="col-5 checkout-aside-summary-value summary-tax">
+                            {{ taxItem.tax|currency }}
+                        </dd>
+                    {% endblock %}
+                {% endblock %}
+            {% endif %}
+        {% endfor %}
+        
+    {% endif %}
 {% endblock %}
