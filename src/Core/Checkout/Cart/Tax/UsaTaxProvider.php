@@ -49,7 +49,7 @@ class UsaTaxProvider extends AbstractTaxProvider
         $zipCode = $address->getZipcode() ?? "00000";
 
         foreach ($cart->getLineItems() as $lineItem) {
-            $originalTaxRate = $lineItem->getPrice()->getCalculatedTaxes()->first()?->getTaxRate() ?? $this->getTaxRateByType('TAX-FREE');
+            $originalTaxRate = $lineItem->getPrice()->getCalculatedTaxes()->first()?->getTaxRate() ?? $this->getDefaultRateByTaxType('TAX-FREE');
 
             if ($lineItem->getPayloadValue('taxId') === Constants::TAXES[1]['id']) {
                 $taxRates = ['TAX-FREE' => $this->getDefaultRateByTaxType('TAX-FREE')];
