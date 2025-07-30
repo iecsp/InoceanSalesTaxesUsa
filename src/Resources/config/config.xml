@@ -20,6 +20,13 @@
             <label lang="de-DE">Fracht ist steuerpflichtig?</label>
         </input-field>
 
+        <input-field type="int">
+            <name>TaxDecimals</name>
+            <defaultValue>2</defaultValue>
+            <label>Tax Decimals</label>
+            <label lang="de-DE">Steuerdezimalzahlen</label>
+        </input-field>
+
     </card>
 </config>
 

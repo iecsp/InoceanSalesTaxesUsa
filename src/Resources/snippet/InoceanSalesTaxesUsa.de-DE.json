@@ -14,11 +14,16 @@
         "shippingDelivered": "Voraussichtliche Lieferzeit:"
       },
       "taxes": {
-        "taxCombinedRate": "Combined Rate (%taxRate%%)",
-        "taxStateRate": "State Rate (%taxRate%%)",
-        "taxCountyRate": "County Rate (%taxRate%%)",
-        "taxCityRate": "City Rate (%taxRate%%)",
-        "taxSpecialRate": "Special Rate (%taxRate%%)",
+        "taxCombinedRate": "Kombinierter Steuersatz (%taxRate%%)",
+        "taxStateRate": "Bundeslandsteuersatz (%taxRate%%)",
+        "taxCountyRate": "Landkreissteuersatz (%taxRate%%)",
+        "taxCityRate": "Stadtsteuersatz (%taxRate%%)",
+        "taxSpecialRate": "Sondersteuersatz (%taxRate%%)",
+        "shippingTaxCombinedRate": "Kombinierter Versandsteuersatz (%taxRate%%)",
+        "shippingTaxStateRate": "Bundeslandsteuersatz (%taxRate%%)",
+        "shippingTaxCountyRate": "Landkreissteuersatz (%taxRate%%)",
+        "shippingTaxCityRate": "Stadtsteuersatz (%taxRate%%)",
+        "shippingTaxSpecialRate": "Sondersteuersatz für Versand (%taxRate%%)",
         "taxTAX": "Steuer ({taxRate}%)",
         "taxTAX-FREE": "STEUERFREI"
       }

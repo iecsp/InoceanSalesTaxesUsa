@@ -57,7 +57,7 @@ Component.override('sw-order-detail-general', {
             this.order.lineItems.forEach(lineItem => {
                 if (lineItem.payload && Array.isArray(lineItem.payload.inoceanShippingTaxInfo)) {
                     lineItem.payload.inoceanShippingTaxInfo.forEach(taxInfo => {
-                        const rateKey = taxInfo.rate;
+                        const rateKey = taxInfo.name;
 
                         if (!shippingTaxAggregation[rateKey]) {
                             shippingTaxAggregation[rateKey] = {

@@ -19,6 +19,11 @@
                 "taxCountyRate": "County Rate (%taxRate%%)",
                 "taxCityRate": "City Rate (%taxRate%%)",
                 "taxSpecialRate": "Special Rate (%taxRate%%)",
+                "shippingTaxCombinedRate": "Shipping Combined Rate (%taxRate%%)",
+                "shippingTaxStateRate": "Shipping State Rate (%taxRate%%)",
+                "shippingTaxCountyRate": "Shipping County Rate (%taxRate%%)",
+                "shippingTaxCityRate": "Shipping City Rate (%taxRate%%)",
+                "shippingTaxSpecialRate": "Shipping Special Rate (%taxRate%%)",
                 "taxTAX-FREE": "TAX-FREE"
             }
         }
