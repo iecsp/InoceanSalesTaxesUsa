@@ -1,15 +1,9 @@
-.checkout-aside-summary-notice {
+.inocean-checkout-aside-summary-notice {
     padding: $spacer-lg 0 0;
     font-size: 0.85rem;
     font-style: italic;
 }
-.checkout-aside-summary-value.summary-net,
-.checkout-aside-summary-label.summary-net {
-    border-top: 1px solid $border-color;
-    padding: $spacer-lg 0 0 0;
-    font-weight: $headings-font-weight;
-}
-.checkout-summary-shipping-details {
+.inocean-checkout-summary-shipping-details {
     font-size: 0.75rem;
     border: 1px solid #ccc;
     padding: $spacer-sm;
@@ -22,10 +16,5 @@
         border-bottom: 1px dotted #ccc;
         padding-bottom: $spacer-sm;
         margin-bottom: $spacer-sm;
-    }
-}
-.line-item-tax-price {
-    .line-item-product-number {
-        font-size: 0.7rem;
     }
 }

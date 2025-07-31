@@ -19,8 +19,8 @@
     "copyright": "(c) by Inocean Technology (iecsp.com)",
     "label": {
       "en-GB": "USA Tax Provider for Shopware",
-      "de-DE": "USA Steueranbieter für Shopware",
-      "fr-FR": "Fournisseur de taxes USA pour Shopware"
+      "en-US": "USA Tax Provider for Shopware",
+      "de-DE": "USA Steueranbieter für Shopware"
     }
   },
   "autoload": {

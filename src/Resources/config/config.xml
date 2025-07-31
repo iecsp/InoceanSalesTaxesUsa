@@ -5,12 +5,14 @@
     <card>
         <title>USA Tax Settings</title>
         <title lang="de-DE">USA Steuereinstellungen</title>
+        <title lang="en-US">USA Tax Settings</title>
 
         <input-field type="bool">
             <name>TaxBreakdown</name>
             <defaultValue>true</defaultValue>
             <label>Show tax breakdown?</label>
             <label lang="de-DE">wie ist die Steueraufschlüsselung?</label>
+            <label lang="en-US">Show tax breakdown?</label>
         </input-field>
 
         <input-field type="bool">
@@ -18,6 +20,7 @@
             <defaultValue>true</defaultValue>
             <label>Freight is taxable?</label>
             <label lang="de-DE">Fracht ist steuerpflichtig?</label>
+            <label lang="en-US">Freight is taxable?</label>
         </input-field>
 
         <input-field type="int">
@@ -25,6 +28,7 @@
             <defaultValue>2</defaultValue>
             <label>Tax Decimals</label>
             <label lang="de-DE">Steuerdezimalzahlen</label>
+            <label lang="en-US">Tax Decimals</label>
         </input-field>
 
     </card>

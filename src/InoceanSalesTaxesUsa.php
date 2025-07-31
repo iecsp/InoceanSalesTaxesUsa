@@ -76,6 +76,9 @@ class InoceanSalesTaxesUsa extends Plugin
             $enGbLangCriteria = (new Criteria())->addFilter(new EqualsFilter('locale.code', 'en-GB'));
             $enGbLanguageId = $languageRepository->searchIds($enGbLangCriteria, $context)->firstId();
 
+            $enUsLangCriteria = (new Criteria())->addFilter(new EqualsFilter('locale.code', 'en-US'));
+            $enUsLanguageId = $languageRepository->searchIds($enUsLangCriteria, $context)->firstId();
+
             $taxProviderData = [
                 'id' => Constants::TAX_PROVIDER_ID,
                 'identifier' => UsaTaxProvider::class,
@@ -87,12 +90,16 @@ class InoceanSalesTaxesUsa extends Plugin
                 'translations' => [],
             ];
 
+            if ($deDeLanguageId) {
+                $taxProviderData['translations'][$deDeLanguageId] = ['name' => 'U.S. Umsatzsteuer-Anbieter'];
+            }
+
             if ($enGbLanguageId) {
                 $taxProviderData['translations'][$enGbLanguageId] = ['name' => 'U.S. Tax Provider'];
             }
 
-            if ($deDeLanguageId) {
-                $taxProviderData['translations'][$deDeLanguageId] = ['name' => 'U.S. Umsatzsteuer-Anbieter'];
+            if ($enUsLanguageId) {
+                $taxProviderData['translations'][$enUsLanguageId] = ['name' => 'U.S. Tax Provider'];
             }
 
             $taxProviderRepository->create([$taxProviderData], $context);

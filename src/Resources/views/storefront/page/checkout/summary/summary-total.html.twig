@@ -10,7 +10,7 @@
 
     {% for delivery in deliveries %}
         {% if delivery.shippingCosts.totalPrice != 0 %}
-            <dt class="col-12 checkout-summary-shipping-details">
+            <dt class="col-12 inocean-checkout-summary-shipping-details">
                 <h5>{{ 'salseTaxUsa.checkout.summary.shippingMethod'|trans }} {{ delivery.shippingMethod.name }}</h5>
                 <div>{{ 'salseTaxUsa.checkout.summary.shippingTotalPrice'|trans }} {{ delivery.shippingCosts.totalPrice|currency }}</div>
                 {% if config('InoceanSalesTaxesUsa.config.FreightTaxable') %}

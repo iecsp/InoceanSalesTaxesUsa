@@ -24,7 +24,7 @@
         "shippingTaxCountyRate": "Landkreissteuersatz (%taxRate%%)",
         "shippingTaxCityRate": "Stadtsteuersatz (%taxRate%%)",
         "shippingTaxSpecialRate": "Sondersteuersatz für Versand (%taxRate%%)",
-        "taxTAX": "Steuer ({taxRate}%)",
+        "taxTAX": "Steuer (%taxRate%%)",
         "taxTAX-FREE": "STEUERFREI"
       }
     }

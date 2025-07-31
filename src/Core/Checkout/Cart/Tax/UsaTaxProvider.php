@@ -53,7 +53,7 @@ class UsaTaxProvider extends AbstractTaxProvider
 
             if ($lineItem->getPayloadValue('taxId') === Constants::TAXES[1]['id']) {
                 $taxRates = ['TAX-FREE' => $this->getDefaultRateByTaxType('TAX-FREE')];
-            } else if ($lineItem->getPayloadValue('taxId') === Constants::TAXES[0]['id']) {
+            } elseif ($lineItem->getPayloadValue('taxId') === Constants::TAXES[0]['id']) {
                 $taxRates = $this->getTaxRatesByZipCode($zipCode, $state, $showTaxBreakdown);
             } else {
                 $taxRates = ['TAX' => $originalTaxRate];
@@ -91,15 +91,15 @@ class UsaTaxProvider extends AbstractTaxProvider
                 $shippingTotalPrice = $delivery->getShippingCosts()->getTotalPrice();
                 $taxId = $delivery->getShippingMethod()->getTaxId();
                 $aggregatedShippingTaxesPayload = [];
-                
                 $deliveryTaxRates = [];
-                if ($taxId === Constants::TAXES[1]['id']) { // TAX-FREE
-                    $deliveryTaxRates = ['TAX-FREE' => $this->getDefaultRateByTaxType('TAX-FREE')];
-                } elseif ($taxId === Constants::TAXES[0]['id']) { // TAXABLE
+                $calculatedDeliveryTaxes = [];
+
+                if ($taxId === Constants::TAXES[0]['id']) {
                     $deliveryTaxRates = $this->getTaxRatesByZipCode($zipCode, $state, $showTaxBreakdown);
+                } else {
+                    $deliveryTaxRates = ['TAX-FREE' => $this->getDefaultRateByTaxType('TAX-FREE')];
                 }
         
-                $calculatedDeliveryTaxes = [];
                 foreach ($deliveryTaxRates as $deliveryTaxName => $deliveryTaxRate) {
                     $deliveryTaxAmount = round($shippingTotalPrice * $deliveryTaxRate / 100, $taxDecimals);
                     $calculatedDeliveryTax = new CalculatedTax($deliveryTaxAmount, $deliveryTaxRate, $shippingTotalPrice);
