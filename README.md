@@ -1,4 +1,4 @@
-# USA Tax Compliance Provider for Shopware
+# USA Tax Provider for Shopware
 
 A powerful and privacy-focused sales tax automation plugin designed specifically for U.S. merchants using the Shopware e-commerce platform. Stay compliant with ever-changing U.S. tax obligations—across states, counties, cities, and even special taxing districts—without exposing your sensitive store data to third-party services.
 
