@@ -1,5 +1,7 @@
 {% sw_extends '@Storefront/storefront/component/line-item/element/tax-price.html.twig' %}
 
+{% set defaultShippingCountry = context.customer.activeShippingAddress.country.iso %}
+
 {% block component_line_item_tax_price_label %}
     {% if defaultShippingCountry != 'US' %}
         {{ parent() }}
