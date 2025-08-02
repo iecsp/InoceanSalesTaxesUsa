@@ -47,7 +47,7 @@ class UsaTaxProvider extends AbstractTaxProvider
 
         $state = $address->getCountryState()->getShortCode() ?? Constants::DEFAULT_STATE;
 
-        $zipCode = substr($address->getZipcode(), 0, 5) ?? "00000";
+        $zipCode = substr($address->getZipcode(), 0, 5) ?? "10000";
 
         foreach ($cart->getLineItems() as $lineItem) {
             $originalTaxRate = $lineItem->getPrice()->getCalculatedTaxes()->first()?->getTaxRate() ?? $this->getDefaultRateByTaxType('TAX-FREE');
@@ -166,15 +166,7 @@ class UsaTaxProvider extends AbstractTaxProvider
             return [];
         }
 
-        $stateCode = substr(strtoupper($state), -2);
-
-        if (!isset($taxData['states'][$stateCode][$zipCode])) {
-            return [];
-        }
-
-        $zipData = $taxData['states'][$stateCode][$zipCode];
-
-        $rateMap = [
+        $rateMapping = [
             'cbr' => 'CombinedRate',
             'str' => 'StateRate',
             'ctr' => 'CountyRate',
@@ -182,17 +174,27 @@ class UsaTaxProvider extends AbstractTaxProvider
             'spr' => 'SpecialRate',
         ];
 
+        $stateCode = substr(strtoupper($state), -2);
+
+        if (!isset($taxData['states'][$stateCode][$zipCode])) {
+            return [
+                $rateMapping['cbr'] => $this->getDefaultRateByTaxType('COMBINED-TAX') ?? 10
+            ];
+        }
+
+        $zipData = $taxData['states'][$stateCode][$zipCode];
+
         if ($showTaxBreakdown) {
             $result = [];
             foreach (['str', 'ctr', 'cir', 'spr'] as $key) {
                 if (isset($zipData[$key])) {
-                    $result[$rateMap[$key]] = (float)$zipData[$key] * 100;
+                    $result[$rateMapping[$key]] = (float)$zipData[$key] * 100;
                 }
             }
             return $result;
         } else {
             return [
-                $rateMap['cbr'] => isset($zipData['cbr']) ? (float)$zipData['cbr'] * 100 : 0.0
+                $rateMapping['cbr'] => isset($zipData['cbr']) ? (float)$zipData['cbr'] * 100 : 0.0
             ];
         }
     }
