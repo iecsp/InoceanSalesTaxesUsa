@@ -151,21 +151,6 @@ class UsaTaxProvider extends AbstractTaxProvider
     {
         $jsonPath = __DIR__ . '/../../../../Config/TaxRates-US.json';
 
-        if (!file_exists($jsonPath)) {
-            return [];
-        }
-
-        $jsonContent = file_get_contents($jsonPath);
-        if ($jsonContent === false) {
-            return [];
-        }
-
-        $taxData = json_decode($jsonContent, true);
-
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            return [];
-        }
-
         $rateMapping = [
             'cbr' => 'CombinedRate',
             'str' => 'StateRate',
@@ -174,11 +159,34 @@ class UsaTaxProvider extends AbstractTaxProvider
             'spr' => 'SpecialRate',
         ];
 
+        $defaultRate = $this->getDefaultRateByTaxType('COMBINED-TAX') ?? 10;
+
+        if (!file_exists($jsonPath)) {
+            return [
+                $rateMapping['cbr'] => $defaultRate
+            ];
+        }
+
+        $jsonContent = file_get_contents($jsonPath);
+        if ($jsonContent === false) {
+            return [
+                $rateMapping['cbr'] => $defaultRate
+            ];
+        }
+
+        $taxData = json_decode($jsonContent, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return [
+                $rateMapping['cbr'] => $defaultRate
+            ];
+        }
+
         $stateCode = substr(strtoupper($state), -2);
 
-        if (!isset($taxData['states'][$stateCode][$zipCode])) {
+        if (!isset($taxData['states'][$stateCode]) || !isset($taxData['states'][$stateCode][$zipCode])) {
             return [
-                $rateMapping['cbr'] => $this->getDefaultRateByTaxType('COMBINED-TAX') ?? 10
+                $rateMapping['cbr'] => $defaultRate
             ];
         }
 
