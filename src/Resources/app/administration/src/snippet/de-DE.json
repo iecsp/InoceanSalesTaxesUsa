@@ -1,23 +1,4 @@
 {
-  "sw-order": {
-    "createBase": {
-      "columnTax": "Steuer",
-      "summaryLabelAmountWithoutTaxes": "Gesamtsumme ohne Steuern",
-      "summaryLabelAmountTotal": "Gesamtsumme inklusive Steuern",
-      "summaryLabelAmountTotalRounded": "Gerundete Gesamtsumme inklusive Steuern",
-      "summaryLabelTaxes": "zuzüglich {taxRate}% Steuer"
-    },
-    "detailBase": {
-      "columnTax": "Steuer",
-      "summaryLabelAmountWithoutTaxes": "Gesamtsumme ohne Steuern",
-      "summaryLabelAmountTotal": "Gesamtsumme inklusive Steuern",
-      "summaryLabelAmountTotalRounded": "Gerundete Gesamtsumme inklusive Steuern",
-      "summaryLabelTaxes": "zuzüglich {taxRate}% Steuer"
-    },
-    "nestedLineItemsModal": {
-      "headerTax": "Steuer"
-    }
-  },
   "salseTaxUsa": {
     "order": {
       "lineItem": {

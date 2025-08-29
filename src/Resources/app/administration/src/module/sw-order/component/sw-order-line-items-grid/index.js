@@ -9,69 +9,22 @@ Component.override('sw-order-line-items-grid', {
     computed: {
 
         getLineItemColumns() {
-            const columnDefinitions = [
-                {
-                    property: 'quantity',
-                    dataIndex: 'quantity',
-                    label: 'sw-order.detailBase.columnQuantity',
-                    allowResize: false,
-                    align: 'right',
-                    inlineEdit: true,
-                    width: '90px',
-                },
-                {
-                    property: 'label',
-                    dataIndex: 'label',
-                    label: 'sw-order.detailBase.columnProductName',
-                    allowResize: false,
-                    primary: true,
-                    inlineEdit: true,
-                    multiLine: true,
-                },
-                {
-                    property: 'payload.productNumber',
-                    dataIndex: 'payload.productNumber',
-                    label: 'sw-order.detailBase.columnProductNumber',
-                    allowResize: false,
-                    align: 'left',
-                    visible: false,
-                },
-                {
-                    property: 'unitPrice',
-                    dataIndex: 'unitPrice',
-                    label: this.unitPriceLabel,
-                    allowResize: false,
-                    align: 'right',
-                    inlineEdit: true,
-                    width: '120px',
-                },
-            ];
+            const columnDefinitions = this.$super('getLineItemColumns');
 
-            if (this.taxStatus !== 'tax-free') {
-                columnDefinitions.push({
-                    property: 'price.taxRules[0]',
-                    label: 'salseTaxUsa.order.lineItem.tax',
-                    allowResize: false,
-                    align: 'right',
-                    inlineEdit: false,
-                    width: '110px',
-                });
-            }
+            return columnDefinitions.map(col => {
+                if (col.property === 'price.taxRules[0]') {
+                    return {
+                        ...col,
+                        label: 'salseTaxUsa.order.lineItem.tax',
+                        allowResize: false,
+                        align: 'right',
+                        inlineEdit: false,
+                        width: '110px',
+                    };
+                }
+                return col;
+            });
 
-            return [
-                ...columnDefinitions,
-                {
-                    property: 'totalPrice',
-                    dataIndex: 'totalPrice',
-                    label:
-                        this.taxStatus === 'gross'
-                            ? 'sw-order.detailBase.columnTotalPriceGross'
-                            : 'sw-order.detailBase.columnTotalPriceNet',
-                    allowResize: false,
-                    align: 'right',
-                    width: '120px',
-                },
-            ];
         },
 
         lineItemTaxesMap() {

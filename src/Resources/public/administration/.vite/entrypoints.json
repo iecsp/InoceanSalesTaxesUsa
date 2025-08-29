@@ -3,11 +3,11 @@
   "entryPoints": {
     "inocean-sales-taxes-usa": {
       "css": [
-        "/bundles/inoceansalestaxesusa/administration/assets/inocean-sales-taxes-usa-DTOFMxXF.css"
+        "/bundles/inoceansalestaxesusa/administration/assets/inocean-sales-taxes-usa-vbBffyx_.css"
       ],
       "dynamic": [],
       "js": [
-        "/bundles/inoceansalestaxesusa/administration/assets/inocean-sales-taxes-usa-ByU8RpRn.js"
+        "/bundles/inoceansalestaxesusa/administration/assets/inocean-sales-taxes-usa--xGfmmKD.js"
       ],
       "legacy": false,
       "preload": []

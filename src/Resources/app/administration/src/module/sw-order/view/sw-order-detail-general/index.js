@@ -74,7 +74,6 @@ Component.override('sw-order-detail-general', {
 
             const aggregatedShippingTaxes = Object.values(shippingTaxAggregation);
 
-            // aggregatedShippingTaxes.sort((a, b) => a.taxRate - b.taxRate);
             return aggregatedShippingTaxes.map(tax => ({
                 taxDetails: {
                     name: tax.taxName,
