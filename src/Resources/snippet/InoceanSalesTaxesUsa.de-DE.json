@@ -1,8 +1,4 @@
 {
-  "general": {
-    "grossTaxInformation": "Preise inkl. MwSt.",
-    "netTaxInformation": "Preise zzgl. MwSt."
-  },
   "salseTaxUsa": {
     "checkout": {
       "summary": {
@@ -27,16 +23,6 @@
         "taxTAX": "Steuer (%taxRate%%)",
         "taxTAX-FREE": "STEUERFREI"
       }
-    }
-  },
-  "document": {
-    "lineItems": {
-      "header": {
-        "tax": "Steuer"
-      },
-      "tax": "zzgl. %taxRate%% Steuer:",
-      "inclVAT": "Inkl. MwSt.",
-      "exclVAT": "Zzgl. MwSt."
     }
   }
 }
