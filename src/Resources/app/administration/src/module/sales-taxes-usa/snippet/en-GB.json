@@ -1,5 +1,5 @@
 {
-  "salseTaxUsa": {
+  "salesTaxUsa": {
     "order": {
       "lineItem": {
         "tax": "Tax"

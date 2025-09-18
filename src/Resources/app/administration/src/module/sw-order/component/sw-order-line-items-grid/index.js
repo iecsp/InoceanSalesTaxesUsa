@@ -15,7 +15,7 @@ Component.override('sw-order-line-items-grid', {
                 if (col.property === 'price.taxRules[0]') {
                     return {
                         ...col,
-                        label: 'salseTaxUsa.order.lineItem.tax',
+                        label: 'salesTaxUsa.order.lineItem.tax',
                         allowResize: false,
                         align: 'right',
                         inlineEdit: false,

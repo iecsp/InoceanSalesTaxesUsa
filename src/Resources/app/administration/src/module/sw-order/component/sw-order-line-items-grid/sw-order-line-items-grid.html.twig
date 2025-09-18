@@ -6,7 +6,7 @@
 <span v-if="item.price && item.price.taxRules.length && lineItemTaxesMap[item.id]"  class="inocean-order-line-items-wrapper">
     <template v-for="(calculatedTax, index) in lineItemTaxesMap[item.id]" :key="index">
         <span class="inocean-order-line-items-taxes">
-            {{ $tc('salseTaxUsa.order.summary.tax' + calculatedTax.taxName, { taxRate: calculatedTax.taxRate }, 1) }} {{ currencyFilter(calculatedTax.taxPrice, order.currency.isoCode, order.totalRounding.decimals) }}
+            {{ $tc('salesTaxUsa.order.summary.tax' + calculatedTax.taxName, { taxRate: calculatedTax.taxRate }, 1) }} {{ currencyFilter(calculatedTax.taxPrice, order.currency.isoCode, order.totalRounding.decimals) }}
         </span>
     </template>
 </span>
