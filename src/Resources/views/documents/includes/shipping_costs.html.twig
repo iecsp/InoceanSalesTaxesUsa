@@ -41,7 +41,7 @@ All blocks of this template are available in the template which renders this tem
                         {% for taxItem in order.lineItems %}
                             {% if taxItem.payload.inoceanShippingTaxInfo is defined and taxItem.payload.inoceanShippingTaxInfo is not empty %}
                                 {% for tax in taxItem.payload.inoceanShippingTaxInfo %}
-                                    {{ ('salseTaxUsa.checkout.taxes.tax' ~ tax.name)|trans({'%taxRate%': tax.rate})|sw_sanitize }} {% if loop.last %}{% else %}<br>{% endif %}
+                                    {{ ('salesTaxUsa.checkout.taxes.tax' ~ tax.name)|trans({'%taxRate%': tax.rate})|sw_sanitize }} {% if loop.last %}{% else %}<br>{% endif %}
                                 {% endfor %}
                             {% endif %}
                         {% endfor %}

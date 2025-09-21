@@ -1,5 +1,5 @@
 {
-    "salseTaxUsa": {
+    "salesTaxUsa": {
         "checkout": {
             "summary": {
                 "taxRateNotice": "Tax rates will be displayed on the checkout page.",

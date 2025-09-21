@@ -1,5 +1,5 @@
 {
-  "salseTaxUsa": {
+  "salesTaxUsa": {
     "checkout": {
       "summary": {
         "taxRateNotice": "Die Steuersätze werden auf der Kassenseite angezeigt.",

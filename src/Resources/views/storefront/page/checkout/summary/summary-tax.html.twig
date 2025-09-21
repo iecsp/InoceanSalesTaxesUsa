@@ -32,7 +32,7 @@
             {% for taxName, taxData in taxTotals %}
                 {% if taxData.total > 0 %}
                     <dt class="col-7 checkout-aside-summary-label summary-tax">
-                        {{ ('salseTaxUsa.checkout.taxes.tax' ~ taxName)|trans({'%taxRate%': taxData.rate})|sw_sanitize }}
+                        {{ ('salesTaxUsa.checkout.taxes.tax' ~ taxName)|trans({'%taxRate%': taxData.rate})|sw_sanitize }}
                     </dt>
                     <dd class="col-5 checkout-aside-summary-value summary-tax">
                         {{ taxData.total|currency }}
@@ -67,7 +67,7 @@
                         {% if defaultShippingCountry == 'US' %}
                             {% set taxName = (taxItem.extensions.taxName.name == 0 ? 'TAX' : taxItem.extensions.taxName.name) %}
                             <dt class="col-7 checkout-aside-summary-label summary-tax">
-                                {{ ('salseTaxUsa.checkout.taxes.tax' ~ taxName)|trans({'%taxRate%': taxItem.taxRate})|sw_sanitize }}
+                                {{ ('salesTaxUsa.checkout.taxes.tax' ~ taxName)|trans({'%taxRate%': taxItem.taxRate})|sw_sanitize }}
                             </dt>
                         {% else %}
                             <dt class="col-7 checkout-aside-summary-label summary-tax">

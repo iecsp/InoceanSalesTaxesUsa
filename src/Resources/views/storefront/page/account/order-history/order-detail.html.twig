@@ -37,7 +37,7 @@
                     {% for taxName, taxData in taxTotals %}
                         {% if calculatedTax.taxRate == taxData.rate %}
                             <dt class="col-6 col-md-8">
-                                {{ ('salseTaxUsa.checkout.taxes.tax' ~ taxName)|trans({'%taxRate%': taxData.rate})|sw_sanitize }}
+                                {{ ('salesTaxUsa.checkout.taxes.tax' ~ taxName)|trans({'%taxRate%': taxData.rate})|sw_sanitize }}
                             </dt>
                             <dd class="col-6 col-md-4">
                                 {{ taxData.total|currency(order.currency.isoCode) }}
@@ -46,7 +46,7 @@
                     {% endfor %}
                 {% else %}
                     <dt class="col-6 col-md-8">
-                        {{ 'salseTaxUsa.checkout.taxes.taxTAX'|trans({
+                        {{ 'salesTaxUsa.checkout.taxes.taxTAX'|trans({
                             '%taxRate%':  calculatedTax.taxRate
                         })|sw_sanitize }}
                     </dt>
