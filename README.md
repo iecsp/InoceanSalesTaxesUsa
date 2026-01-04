@@ -81,13 +81,6 @@ All tax calculations are performed locally. No data is sent to third-party APIs,
 
 ---
 
-## 🆘 Support
-
-**Email:** iecsp.com@gmail.com  
-Response within 24–72 business hours for U.S. merchants.
-
----
-
 ## ⚠️ Tax Compliance Notice
 
 *While this plugin automates U.S. sales tax calculations and compliance, it remains your responsibility as a merchant to verify and file accurate returns for all applicable federal, state, and local tax laws. Please consult a qualified tax professional for any complex or high-volume sales scenarios.*
