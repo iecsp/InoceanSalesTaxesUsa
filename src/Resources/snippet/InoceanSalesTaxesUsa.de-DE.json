@@ -24,5 +24,8 @@
         "taxTAX-FREE": "STEUERFREI"
       }
     }
+  },
+  "checkout": {
+    "inocean-usa-unknown-tax-zip": "Für die Postleitzahl %zipcode% (%state%) kann keine Umsatzsteuer ermittelt werden. Bitte prüfen Sie die Adresse."
   }
 }

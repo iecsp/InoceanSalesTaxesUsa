@@ -24,5 +24,8 @@
                 "taxTAX-FREE": "TAX-FREE"
             }
         }
+    },
+    "checkout": {
+        "inocean-usa-unknown-tax-zip": "Sales tax cannot be determined for ZIP code %zipcode% (%state%). Please check the address."
     }
 }

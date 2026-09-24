@@ -7,6 +7,7 @@
         <service id="InoceanSalesTaxesUsa\Core\Checkout\Cart\Tax\UsaTaxProvider">
             <tag name="shopware.tax.provider"/>
             <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="logger"/>
         </service>
     </services>
 </container>
