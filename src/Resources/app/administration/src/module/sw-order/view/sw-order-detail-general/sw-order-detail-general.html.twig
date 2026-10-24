@@ -1,6 +1,6 @@
 {% block sw_order_detail_general_line_items_summary_amount_without_tax %}
 <template v-if="taxStatus !== 'tax-free'">
-    <dt><strong>{{ $tc('salesTaxUsa.order.summary.subtotal') }}</strong></dt>
+    <dt><strong>{{ $t('salesTaxUsa.order.summary.subtotal') }}</strong></dt>
     <dd><strong>{{ currencyFilter(order.amountNet, currency.isoCode, order.totalRounding.decimals) }}</strong></dd>
 </template>
 {% endblock %}
@@ -12,7 +12,7 @@
             :key="index"
         >
             <dt>
-                {{ $tc('salesTaxUsa.order.summary.tax' + calculatedTax.taxDetails.name, { taxRate: calculatedTax.taxDetails.rate.toFixed(2) }, 1) }}
+                {{ $t('salesTaxUsa.order.summary.tax' + calculatedTax.taxDetails.name, { taxRate: calculatedTax.taxDetails.rate.toFixed(2) }) }}
             </dt>
             <dd>
                 {{ currencyFilter(calculatedTax.taxDetails.tax, currency.isoCode, order.totalRounding.decimals) }}
@@ -23,7 +23,7 @@
             :key="index"
         >
             <dt>
-                {{ $tc('salesTaxUsa.order.summary.shippingTax' + shippingTax.taxDetails.name, { taxRate: shippingTax.taxDetails.rate.toFixed(2) }, 1) }}
+                {{ $t('salesTaxUsa.order.summary.shippingTax' + shippingTax.taxDetails.name, { taxRate: shippingTax.taxDetails.rate.toFixed(2) }) }}
             </dt>
             <dd>
                 {{ currencyFilter(shippingTax.taxDetails.tax, currency.isoCode, order.totalRounding.decimals) }}
@@ -34,10 +34,10 @@
 
 {% block sw_order_detail_general_line_items_summary_amount_total %}
 <template v-if="taxStatus !== 'tax-free'">
-    <dt><strong>{{ $tc('salesTaxUsa.order.summary.groundTotal') }}</strong></dt>
+    <dt><strong>{{ $t('salesTaxUsa.order.summary.groundTotal') }}</strong></dt>
     <dd><strong>{{ currencyFilter(orderTotal, currency.isoCode, order.totalRounding.decimals) }}</strong></dd>
     <template v-if="displayRounded">
-        <dt><strong>{{ $tc('salesTaxUsa.order.summary.totalRounded') }}</strong></dt>
+        <dt><strong>{{ $t('salesTaxUsa.order.summary.totalRounded') }}</strong></dt>
         <dd><strong>{{ currencyFilter(order.price.totalPrice, currency.isoCode, order.totalRounding.decimals) }}</strong></dd>
     </template>
 </template>
