@@ -1,0 +1,13 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 1
+			path: src/Core/Checkout/Cart/Tax/UsaTaxProvider.php
+
+		-
+			message: '#^Parameter &\$aggregatedCartTaxes by\-ref type of method InoceanSalesTaxesUsa\\Core\\Checkout\\Cart\\Tax\\UsaTaxProvider\:\:aggregate\(\) expects array\<string, array\{name\: string, rate\: float\|int, tax\: float, price\: float, lines\: array\<string, true\>\}\>, non\-empty\-array\<int\|string, array\{name\: string, rate\: float\|int, tax\: float, price\: float, lines\: array\<string, true\>\}\> given\.$#'
+			identifier: parameterByRef.type
+			count: 1
+			path: src/Core/Checkout/Cart/Tax/UsaTaxProvider.php
